@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFIASEC Student Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="bg-slideshow"></div>
+    <div id="portal-clock" class="glass-clock">00:00:00</div>
+
+    <div id="student-auth" class="glass-panel">
+        <h2>STUDENT PORTAL</h2>
+        <input type="text" id="s-id" placeholder="ENTER STUDENT ID (AA-XXXXXX)">
+        <input type="password" id="s-pass" placeholder="ENTER PASSWORD">
+        <button onclick="loginStudent()">LOGIN</button>
+        <p style="font-size: 0.8rem; margin-top: 15px;">NEW HERE? <a href="#" onclick="showScreen('signup-screen')" style="color:var(--glow)">REGISTER</a></p>
+    </div>
+
+    <div id="signup-screen" class="glass-panel hidden">
+        <h2>REGISTRATION</h2>
+        <div class="form-scroll" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+            <input type="text" id="reg-name" placeholder="FULL NAME (e.g. ADJETEY CALEB KWABENA )">
+            
+            <select id="reg-year">
+                <option value="" disabled selected>SELECT YEAR</option>
+                <option value="1">YEAR 1</option>
+                <option value="2">YEAR 2</option>
+                <option value="3">YEAR 3</option>
+            </select>
+
+            <input type="text" id="reg-home" placeholder="HOME LOCATION (e,g ACCRA-NEW TOWN)">
+            <input type="tel" id="reg-parent" placeholder="PARENT CONTACT">
+            
+            <select id="reg-group" onchange="checkGroup(this.value)">
+                <option value="NONE">SELECT GROUP</option>
+                <option value="CADET CORPSE">CADET CORPSE</option>
+                <option value="CULTURE TROUPE">CULTURE TROUPE</option>
+                <option value="DEBATE CLASS">DEBATE CLASS</option>
+            </select>
+            <p id="group-note" style="color: #ff4444; font-size: 0.6rem; margin: 5px 0;"></p>
+
+            <input type="password" id="reg-pass" placeholder="CREATE PASSWORD (10+ CHARS)">
+            
+            <label style="font-size: 0.7rem; color: #888; display: block; margin-top: 10px;">PROFILE PHOTO:</label>
+            <input type="file" id="reg-photo" accept="image/*">
+
+            <div class="biometric-section" style="margin: 20px 0; padding: 10px; border: 1px dashed var(--glow); border-radius: 8px;">
+                <p style="font-size: 0.6rem; color: var(--glow);">OPTIONAL BIOMETRIC ENROLLMENT</p>
+                <button type="button" onclick="enrollFingerprint()" class="outline" style="font-size: 0.7rem;">🧬 REGISTER FINGERPRINT</button>
+                <small id="bio-status" style="font-size: 0.5rem; color: #888; display: block; margin-top: 5px;">Hardware not detected</small>
+            </div>
+        </div>
+        
+        <button onclick="handleRegister()" style="margin-top: 20px;">COMPLETE REGISTRATION</button>
+        <button class="outline" onclick="showScreen('student-auth')">CANCEL</button>
+    </div>
+
+    <div id="student-dashboard" class="glass-panel hidden">
+        <h1 id="greet-user" style="color: var(--glow);">WELCOME</h1>
+        <p style="font-size: 0.7rem; color: #888; margin-bottom: 20px;">STUDENT COMMAND CENTER</p>
+        
+        <div class="tile-grid">
+            <div class="tile" onclick="renderIDCard()">🪪 VIEW ID</div>
+            <div class="tile" onclick="alert('Messages coming soon')">📩 INBOX <span id="msg-badge">0</span></div>
+            <div class="tile" onclick="changeStudentPass()">🔑 PASSWORD</div>
+            <div class="tile danger" onclick="logout()">🔒 LOGOUT</div>
+        </div>
+    </div>
+
+    <div id="id-view" class="glass-panel hidden" style="max-width: 500px;">
+        <div class="id-card-container" id="printable-id">
+            <div class="id-left">
+                <div class="id-photo"><img id="id-img" src="" alt="Student Photo"></div>
+                <h3 id="id-name-display" style="margin: 5px 0;">NAME HERE</h3>
+                <p id="id-num-display" style="font-size: 0.8rem; color: var(--glow);">AA-000000</p>
+                <div id="qrcode" style="margin-top: 10px; display: flex; justify-content: center;"></div>
+            </div>
+            
+            <div class="id-right">
+                <div class="id-row"><span>STATUS</span> <b id="id-status" style="color:var(--glow)">ACTIVE</b></div>
+                <div class="id-row"><span>HOME</span> <i id="id-home" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row"><span>PARENT</span> <i id="id-parent" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row"><span>GROUP</span> <i id="id-group" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row" style="border: none;"><span>REASON</span> <small id="id-exeat-reason" style="font-size: 0.6rem; color: #888;">None</small></div>
+                
+                <div class="id-biometrics">
+                    <div class="bio-box">L-THUMB</div>
+                    <div class="bio-box">R-THUMB</div>
+                    <div class="bio-box" style="border-color: var(--glow); color: var(--glow);">SCAN</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px; width: 100%;">
+            <button onclick="window.print()" style="flex: 1;">PRINT CARD</button>
+            <button class="outline" onclick="closeIDView()" style="flex: 1;">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

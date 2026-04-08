@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFIASEC - Secure Digital Gateway</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Enhancing the Gateway Experience */
+        .gateway-container {
+            animation: fadeIn 1.2s ease-out;
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .logo-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px var(--glow));
+            display: inline-block;
+        }
+
+        .portal-btn {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--glow);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            box-shadow: 0 0 8px var(--glow);
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-slideshow"></div>
+    <div id="portal-clock" class="glass-clock">00:00:00</div>
+
+    <div class="glass-panel gateway-container">
+        <div class="logo-icon">🛡️</div>
+        <h1 style="letter-spacing: 3px; color: #fff; margin-bottom: 5px; font-size: 1.5rem;">AFIASEC ACADEMY</h1>
+        <p style="color: var(--glow); font-size: 0.7rem; margin-bottom: 30px; font-weight: bold; text-transform: uppercase;">
+            <span class="status-dot"></span> Digital Portal System Online
+        </p>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="portal-btn" onclick="window.location.href='student.html'">
+                STUDENT ACCESS
+            </button>
+            
+            <button class="portal-btn outline" onclick="window.location.href='teacher.html'">
+                ADMINISTRATION
+            </button>
+        </div>
+
+        <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <p style="font-size: 0.55rem; color: #777; line-height: 1.6; text-transform: uppercase; letter-spacing: 1px;">
+                Secure Gateway v2.0<br>
+                <span style="color: rgba(255,255,255,0.3);">Authorized Personnel Only</span>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

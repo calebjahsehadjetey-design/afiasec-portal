@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFIASEC Teacher Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="bg-slideshow"></div>
+    <div id="portal-clock" class="glass-clock">00:00:00</div>
+
+    <div id="teacher-auth" class="glass-panel">
+        <div class="admin-badge" style="color: #ff4444; font-weight: bold; margin-bottom: 10px; font-size: 0.7rem;">OFFICIAL USE ONLY</div>
+        <h2>TEACHER VERIFICATION</h2>
+        <input type="password" id="t-pass-only" placeholder="ENTER ACCESS KEY">
+        <button onclick="loginTeacher()">VERIFY & ENTER</button>
+    </div>
+
+    <div id="teacher-dashboard" class="glass-panel hidden" style="max-width: 900px;">
+        <div class="admin-header">
+            <div class="stats-bar" style="display: flex; justify-content: space-around; margin-bottom: 15px; font-size: 0.8rem;">
+                <span>TOTAL STUDENTS: <b id="stat-total">0</b></span>
+                <span>ACTIVE: <b id="stat-active" style="color:var(--glow)">0</b></span>
+            </div>
+            <h2 style="letter-spacing: 2px;">ACADEMY ADMINISTRATION</h2>
+            <div class="admin-controls" style="margin-top: 15px;">
+                <input type="text" id="student-search" placeholder="SEARCH NAME OR ID..." onkeyup="filterStudents()">
+                <button onclick="changeTeacherPass()" class="outline" style="width: auto; padding: 10px; margin-top: 10px;">🔑 CHANGE MASTER KEY</button>
+            </div>
+        </div>
+
+        <div id="student-grid" class="student-grid" style="margin-top: 20px; min-height: 100px;"></div>
+        
+        <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="outline" onclick="wipeAllStudentData()" style="border-color: #ff4444; color: #ff4444;">⚠️ WIPE ALL STUDENT DATA</button>
+            <button onclick="logout()">TERMINATE SESSION</button>
+        </div>
+    </div>
+
+    <div id="id-view" class="glass-panel hidden" style="max-width: 500px;">
+        <div class="id-card-container" id="printable-id">
+            <div class="id-left">
+                <div class="id-photo"><img id="id-img" src="" alt="Photo"></div>
+                <h3 id="id-name-display">NAME HERE</h3>
+                <p id="id-num-display">AA-000000</p>
+                <div id="qrcode" style="display: flex; justify-content: center; margin-top: 10px;"></div>
+            </div>
+            
+            <div class="id-right">
+                <div class="id-row"><span>STATUS</span> <b id="id-status" style="color:var(--glow)">ACTIVE</b></div>
+                <div class="id-row"><span>HOME</span> <i id="id-home" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row"><span>PARENT</span> <i id="id-parent" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row"><span>GROUP</span> <i id="id-group" style="font-size: 0.7rem;">-</i></div>
+                <div class="id-row" style="border: none;"><span>REASON</span> <small id="id-exeat-reason" style="font-size: 0.6rem; color: #888;">None</small></div>
+                
+                <div class="id-biometrics">
+                    <div class="bio-box">L-THUMB</div>
+                    <div class="bio-box">R-THUMB</div>
+                    <div class="bio-box" style="border-color: var(--glow); color: var(--glow);">SCAN</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px; width: 100%;">
+            <button onclick="window.print()" style="flex: 1;">PRINT CARD</button>
+            <button class="outline" onclick="closeIDView()" style="flex: 1;">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
